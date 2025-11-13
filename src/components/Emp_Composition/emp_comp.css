@@ -1,0 +1,84 @@
+/* src/components/Emp_Composition/emp_comp.css */
+
+.emp-card {
+  background: #e6f6fa;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.06);
+  border: 1px solid rgba(19, 38, 63, 0.04);
+  width: 340px;
+  font-family: Inter, system-ui, Arial, sans-serif;
+}
+
+.emp-title {
+  color: #2b3b6b;
+  font-weight: 700;
+  margin: 0 0 12px 6px;
+  font-size: 18px;
+}
+
+.emp-donut-wrap {
+  position: relative;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emp-donut-canvas {
+  position: absolute;
+  inset: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emp-donut-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.emp-badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-weight: 700;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(19, 38, 63, 0.06);
+  border: 1px solid rgba(19, 38, 63, 0.05);
+  white-space: nowrap;
+}
+
+.emp-badge-icon {
+  font-size: 16px;
+}
+
+.emp-badge-female {
+  left: 14px;
+  top: 22px;
+  color: #3b2bea;
+}
+
+.emp-badge-male {
+  right: 12px;
+  bottom: 26px;
+  color: #27d9b1;
+}
+
+@media (max-width: 420px) {
+  .emp-card {
+    width: 92%;
+  }
+
+  .emp-donut-wrap {
+    height: 200px;
+  }
+
+  .emp-badge {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}
