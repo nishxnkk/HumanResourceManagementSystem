@@ -31,71 +31,52 @@ const meetings = [
 
 export default function MeetingsUI() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-gray-200 flex items-center justify-center p-6">
+    <div className="w-full flex items-start justify-center p-2 bg-[#F5F9FF]">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-md"
+        transition={{ duration: 0.4 }}
+        className="w-full max-w-xl"
       >
-        <div className="bg-white/60 backdrop-blur-md border border-white/40 rounded-2xl shadow-2xl p-6">
+        <div className="bg-white border border-[#E5E7EB] rounded-xl shadow-sm p-4">
+          {/* Header */}
           <div className="flex items-center justify-between mb-4">
-            <div>
-              <h2 className="text-2xl font-semibold text-gray-800">Meetings</h2>
-              <p className="text-sm text-gray-500 mt-1">Upcoming schedule — stay prepared</p>
-            </div>
-            <button
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/80 border border-white/50 shadow-sm hover:scale-105 transition-transform"
-              aria-label="Open calendar"
-            >
-              <Calendar size={16} />
-              <span className="text-sm font-medium text-gray-700">Calendar</span>
+            <h2 className="text-lg font-semibold text-gray-800">Meetings</h2>
+
+            <button className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md border border-gray-300 bg-white hover:bg-gray-100">
+              <Calendar size={14} /> Calendar
             </button>
           </div>
 
-          <div className="space-y-4">
+          {/* Meeting List */}
+          <div className="space-y-3">
             {meetings.map((m, idx) => (
               <motion.div
                 key={m.id}
                 initial={{ opacity: 0, x: 10 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.05 * idx }}
-                className="flex items-center gap-4 bg-white/70 rounded-lg p-3 border border-white/30 shadow-sm hover:shadow-md hover:scale-[1.01] transition-transform"
+                transition={{ delay: idx * 0.05 }}
+                className="flex items-center gap-3 bg-white rounded-md border border-gray-200 p-2.5 hover:shadow transition"
               >
-                <div className="flex-shrink-0">
-                  <div
-                    className={`w-14 h-14 rounded-lg flex flex-col items-center justify-center text-center text-white shadow-inner bg-gradient-to-br ${m.color}`}
-                    aria-hidden="true"
-                  >
-                    <span className="text-xs font-medium opacity-90">{m.dayShort}</span>
-                    <span className="text-lg font-semibold mt-0.5">{m.date}</span>
-                  </div>
+                {/* Date box */}
+                <div
+                  className={`w-12 h-12 rounded-md flex flex-col items-center justify-center text-white bg-gradient-to-br ${m.color}`}
+                >
+                  <span className="text-[11px] opacity-90">{m.dayShort}</span>
+                  <span className="text-base font-semibold -mt-1">{m.date}</span>
                 </div>
 
+                {/* Text */}
                 <div className="flex-1">
                   <div className="flex items-start justify-between">
-                    <h3 className="text-gray-800 font-semibold">{m.title}</h3>
-                    <div className="text-xs text-gray-400 flex items-center gap-1">
-                      <Clock size={14} />
-                      <span>{/* small empty spacer for alignment */}</span>
-                    </div>
+                    <h3 className="text-sm font-semibold text-gray-800">{m.title}</h3>
+                    <Clock size={12} className="text-gray-400" />
                   </div>
-                  <p className="text-sm text-gray-500 mt-1">{m.time}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{m.time}</p>
                 </div>
               </motion.div>
             ))}
           </div>
-
-          <div className="mt-6 flex items-center justify-between">
-            <div className="text-xs text-gray-500">Last synced 10 minutes ago</div>
-            <button className="text-sm font-medium px-4 py-2 rounded-md bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow hover:brightness-95 transition">
-              Sync now
-            </button>
-          </div>
-        </div>
-
-        <div className="mt-6 text-center text-xs text-gray-400">
-          Tip: Hover a meeting to see subtle elevation and action hints.
         </div>
       </motion.div>
     </div>
