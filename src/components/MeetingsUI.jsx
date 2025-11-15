@@ -1,5 +1,5 @@
 import React from "react";
-import { Calendar, Clock } from "lucide-react";
+import { Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
 const meetings = [
@@ -31,54 +31,46 @@ const meetings = [
 
 export default function MeetingsUI() {
   return (
-    <div className="w-full flex items-start justify-center p-2 bg-[#F5F9FF]">
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="w-full max-w-xl"
-      >
-        <div className="bg-white border border-[#E5E7EB] rounded-xl shadow-sm p-4">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-800">Meetings</h2>
+    <div className="bg-white p-[14px] w-full max-w-[500px] h-[310px] rounded-xl overflow-hidden flex flex-col border border-[rgba(19,38,63,0.04)] shadow-[0_8px_20px_rgba(2,6,23,0.06)]">
+      <div className="text-blue-600 font-bold mb-3 ml-1.5 text-lg">
+        Meetings
+      </div>
 
-            <button className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md border border-gray-300 bg-white hover:bg-gray-100">
-              <Calendar size={14} /> Calendar
-            </button>
-          </div>
-
-          {/* Meeting List */}
-          <div className="space-y-3">
-            {meetings.map((m, idx) => (
-              <motion.div
-                key={m.id}
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.05 }}
-                className="flex items-center gap-3 bg-white rounded-md border border-gray-200 p-2.5 hover:shadow transition"
+      <div className="flex-1 space-y-2.5 overflow-y-auto">
+        {meetings.map((m, idx) => (
+          <motion.div
+            key={m.id}
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.05 * idx }}
+            className="flex items-center gap-3 bg-gray-50 rounded-lg p-2.5 border border-gray-100 hover:shadow-sm transition-shadow"
+          >
+            <div className="flex-shrink-0">
+              <div
+                className={`w-12 h-12 rounded-lg flex flex-col items-center justify-center text-center text-white bg-gradient-to-br ${m.color}`}
               >
-                {/* Date box */}
-                <div
-                  className={`w-12 h-12 rounded-md flex flex-col items-center justify-center text-white bg-gradient-to-br ${m.color}`}
-                >
-                  <span className="text-[11px] opacity-90">{m.dayShort}</span>
-                  <span className="text-base font-semibold -mt-1">{m.date}</span>
-                </div>
+                <span className="text-[10px] font-medium opacity-90">{m.dayShort}</span>
+                <span className="text-base font-semibold leading-tight">{m.date}</span>
+              </div>
+            </div>
 
-                {/* Text */}
-                <div className="flex-1">
-                  <div className="flex items-start justify-between">
-                    <h3 className="text-sm font-semibold text-gray-800">{m.title}</h3>
-                    <Clock size={12} className="text-gray-400" />
-                  </div>
-                  <p className="text-xs text-gray-500 mt-0.5">{m.time}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-gray-800 font-semibold text-sm truncate">{m.title}</h3>
+              <p className="text-xs text-gray-500 mt-0.5 flex items-center gap-1">
+                <Clock size={12} />
+                <span className="truncate">{m.time}</span>
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="mt-3 flex items-center justify-between pt-2 border-t border-gray-100">
+        <div className="text-[10px] text-gray-500">Last synced 10m ago</div>
+        <button className="text-xs font-medium px-3 py-1.5 rounded-md bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:brightness-95 transition">
+          Sync
+        </button>
+      </div>
     </div>
   );
 }

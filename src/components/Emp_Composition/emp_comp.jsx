@@ -3,9 +3,22 @@ import React, { useMemo, useRef } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip } from "chart.js";
 import { FaMars, FaVenus } from "react-icons/fa";
-import "./emp_comp.css"; 
+import "./emp_comp.css";
 
-Chart.register(ArcElement, Tooltip);
+// Custom plugin to set background color to white
+const backgroundColorPlugin = {
+  id: 'backgroundColor',
+  beforeDraw: (chart) => {
+    const { ctx } = chart;
+    ctx.save();
+    ctx.globalCompositeOperation = 'destination-over';
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, chart.width, chart.height);
+    ctx.restore();
+  }
+};
+
+Chart.register(ArcElement, Tooltip, backgroundColorPlugin);
 
 export default function EmpComp({ male = 65, female = 35 }) {
   const chartRef = useRef(null);

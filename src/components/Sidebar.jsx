@@ -65,57 +65,80 @@ const Icon = ({ name }) => {
   }
 }
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, toggleSidebar }) => {
   return (
-    <aside
-      id="cta-button-sidebar"
-      className="fixed top-0 left-0 z-40 w-48 h-screen transition-transform -translate-x-full sm:translate-x-0"
-      aria-label="Sidebar"
-    >
-      <div
-        className="h-full flex flex-col px-4 py-6 overflow-hidden text-white"
-        style={{ backgroundColor: '#266ECD' }}
+    <>
+      {/* Mobile Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 sm:hidden"
+          onClick={toggleSidebar}
+        ></div>
+      )}
+
+      {/* Hamburger Menu for Mobile */}
+      <button
+        className="fixed top-4 left-4 z-50 sm:hidden bg-blue-600 text-white p-2 rounded-md"
+        onClick={toggleSidebar}
+        aria-label="Toggle Sidebar"
       >
-        {/* Logo / App Title */}
-        <div className="mb-6">
-          <div className="flex items-center gap-3">
-            <div className="items-baseline gap-2">
-              <div className="text-lg font-bold">HRMS</div>
-              <div className="text-[8px] opacity-70 whitespace-nowrap">Human Resource Management System</div>
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <aside
+        id="cta-button-sidebar"
+        className={`fixed top-0 left-0 z-40 w-48 h-screen transition-transform ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } sm:translate-x-0`}
+        aria-label="Sidebar"
+      >
+        <div
+          className="h-full flex flex-col px-4 py-6 overflow-hidden text-white"
+          style={{ backgroundColor: '#266ECD' }}
+        >
+          {/* Logo / App Title */}
+          <div className="mb-6">
+            <div className="flex items-center gap-3">
+              <div className="items-baseline gap-2">
+                <div className="text-lg font-bold">HRMS</div>
+                <div className="text-[8px] opacity-70 whitespace-nowrap">Human Resource Management System</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Profile Section */}
-        <div className="mb-6 flex items-center gap-3 px-2">
-          <div className="w-12 h-12 rounded-full bg-white overflow-hidden flex items-center justify-center">
-            {/* placeholder initials avatar */}
-            <span className="text-blue-600 font-semibold">U</span>
+          {/* Profile Section */}
+          <div className="mb-6 flex items-center gap-3 px-2">
+            <div className="w-12 h-12 rounded-full bg-white overflow-hidden flex items-center justify-center">
+              {/* placeholder initials avatar */}
+              <span className="text-blue-600 font-semibold">U</span>
+            </div>
+            <div>
+              <div className="font-semibold">Userxyz</div>
+              <div className="text-xs opacity-90">HR Manager</div>
+            </div>
           </div>
-          <div>
-            <div className="font-semibold">Userxyz</div>
-            <div className="text-xs opacity-90">HR Manager</div>
-          </div>
-        </div>
 
-        {/* Navigation */}
-        <nav className="mt-2">
-          <ul className="space-y-3">
-            {menuItems.map((item) => (
-              <li key={item.key}>
-                <a
-                  href="#"
-                  className="flex items-center gap-3 p-2 rounded-lg text-white hover:bg-white hover:bg-opacity-20 hover:text-black transition-colors"
-                >
-                  <Icon name={item.icon} />
-                  <span className="text-sm">{item.label}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-    </aside>
+          {/* Navigation */}
+          <nav className="mt-2">
+            <ul className="space-y-3">
+              {menuItems.map((item) => (
+                <li key={item.key}>
+                  <a
+                    href="#"
+                    className="flex items-center gap-3 p-2 rounded-lg text-white hover:bg-white hover:bg-opacity-20 hover:text-black transition-colors"
+                  >
+                    <Icon name={item.icon} />
+                    <span className="text-sm">{item.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </aside>
+    </>
   )
 }
 
