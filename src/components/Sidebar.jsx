@@ -65,7 +65,12 @@ const Icon = ({ name }) => {
   }
 }
 
-const Sidebar = ({ isOpen, toggleSidebar }) => {
+const Sidebar = ({ isOpen, toggleSidebar, currentPage, setCurrentPage }) => {
+  const handleMenuClick = (pageKey) => {
+    setCurrentPage(pageKey);
+    toggleSidebar(); // Close sidebar on mobile after selection
+  };
+
   return (
     <>
       {/* Mobile Overlay */}
@@ -121,17 +126,21 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </div>
 
           {/* Navigation */}
-          <nav className="mt-2">
+          <nav className="mt-2 flex-1">
             <ul className="space-y-3">
               {menuItems.map((item) => (
                 <li key={item.key}>
-                  <a
-                    href="#"
-                    className="flex items-center gap-3 p-2 rounded-lg text-white hover:bg-white hover:bg-opacity-20 hover:text-black transition-colors"
+                  <button
+                    onClick={() => handleMenuClick(item.key)}
+                    className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                      currentPage === item.key 
+                        ? 'bg-white bg-opacity-20 text-black' 
+                        : 'text-white hover:bg-white hover:bg-opacity-20 hover:text-black'
+                    }`}
                   >
                     <Icon name={item.icon} />
                     <span className="text-sm">{item.label}</span>
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
