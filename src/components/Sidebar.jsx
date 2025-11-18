@@ -66,6 +66,8 @@ const Icon = ({ name }) => {
 }
 
 const Sidebar = ({ isOpen, toggleSidebar, currentPage, setCurrentPage }) => {
+  const { isDark, toggleTheme } = useTheme()
+  
   const handleMenuClick = (pageKey) => {
     setCurrentPage(pageKey);
     toggleSidebar(); // Close sidebar on mobile after selection
@@ -145,6 +147,28 @@ const Sidebar = ({ isOpen, toggleSidebar, currentPage, setCurrentPage }) => {
               ))}
             </ul>
           </nav>
+
+          {/* Dark Mode Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="w-full flex items-center justify-center gap-2 mt-auto p-3 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-colors text-white"
+          >
+            {isDark ? (
+              <>
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 3v1m0 16v1m9-9h-1m-16 0H1m15.364 1.636l.707-.707M6.343 17.657l-.707-.707m12.728 0l-.707.707M6.343 6.343l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+                <span className="text-sm">Light</span>
+              </>
+            ) : (
+              <>
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+                <span className="text-sm">Dark</span>
+              </>
+            )}
+          </button>
         </div>
       </aside>
     </>

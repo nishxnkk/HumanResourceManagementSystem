@@ -6,21 +6,23 @@ import StatsCards from "./components/StatsCard";
 import EmpComposition from "./components/Emp_Composition/emp_comp";
 import MeetingsUI from "./components/MeetingsUI.jsx";
 import Chat from "./components/chat/Chat";
+import { useTheme } from "./context/ThemeContext";
 
 function App() {
   const [count, setCount] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState("Dashboard");
+  const { isDark } = useTheme();
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
-    <>
+    <div className={isDark ? 'dark' : ''}>
       <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      <div className={`transition-all duration-300 ${sidebarOpen ? 'ml-48' : 'ml-0'} sm:ml-48`}>
+      <div className={`transition-all duration-300 ${sidebarOpen ? 'ml-48' : 'ml-0'} sm:ml-48 bg-gray-50 dark:bg-gray-900 min-h-screen`}>
         {currentPage === "Dashboard" && (
           <div className="p-4 sm:p-8">
-            <h1 className="text-xl font-bold text-blue-600 mb-6">Dashboard</h1>
+            <h1 className="text-xl font-bold text-blue-600 dark:text-blue-400 mb-6">Dashboard</h1>
             <StatsCards />
             <div className="mt-2">
               <EmployeesStatistics />
@@ -37,7 +39,7 @@ function App() {
         )}
         {currentPage === "Chat" && <Chat />}
       </div>
-    </>
+    </div>
   );
 }
 

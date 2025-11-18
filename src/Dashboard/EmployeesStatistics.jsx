@@ -78,8 +78,8 @@ const data = [
 
 export default function HiringStatsChart() {
   return (
-    <div className="w-full h-[400px] bg-white p-6 rounded-xl shadow-md">
-      <h2 className="text-lg font-semibold mb-6 text-blue-600">
+    <div className="w-full h-[400px] bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md dark:shadow-lg">
+      <h2 className="text-lg font-semibold mb-6 text-blue-600 dark:text-blue-400">
         Monthly Hiring & Attrition Analysis
       </h2>
 

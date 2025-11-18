@@ -14,10 +14,10 @@ export default function StatsCards() {
       {statsData.map((stat, index) => (
         <div
           key={index}
-          className="bg-white p-3 rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.03] transition-transform duration-300 ease-in-out"
+          className="bg-white dark:bg-gray-800 p-3 rounded-2xl shadow-md dark:shadow-lg hover:shadow-xl hover:scale-[1.03] transition-transform duration-300 ease-in-out dark:hover:shadow-gray-700/50"
         >
           <div className="flex justify-between items-center mb-1">
-            <h3 className="text-gray-500 text-xs font-medium">{stat.title}</h3>
+            <h3 className="text-gray-500 dark:text-gray-400 text-xs font-medium">{stat.title}</h3>
             <span
               className={`flex items-center text-xs font-semibold ${
                 stat.positive ? "text-green-500" : "text-red-500"
@@ -31,10 +31,10 @@ export default function StatsCards() {
               {stat.change}
             </span>
           </div>
-          <p className="text-2xl font-semibold text-gray-800">
+          <p className="text-2xl font-semibold text-gray-800 dark:text-white">
             {stat.value.toLocaleString()}
           </p>
-          <p className="text-xs text-gray-500 font-medium mt-0.5">
+          <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mt-0.5">
             {stat.label}
           </p>
         </div>
